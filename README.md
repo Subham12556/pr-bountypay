@@ -25,6 +25,9 @@ Paying outside contributors is slow and risky. Someone has to check that the fix
 5. **Pay.** Only if tests pass, no secrets are found, no injection is detected and the score is **95 or higher**, the agent captures the hold and sends a PayPal Payout.
 6. **Hold.** Otherwise nothing moves, and the ledger shows the reason.
 
+## Architecture
+![PR-BountyPay architecture](docs/architecture.png)
+
 ### Outcomes tested on the sandbox
 
 | Scenario | Result |
