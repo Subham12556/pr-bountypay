@@ -25,8 +25,6 @@ Paying outside contributors is slow and risky. Someone has to check that the fix
 5. **Pay.** Only if tests pass, no secrets are found, no injection is detected and the score is **95 or higher**, the agent captures the hold and sends a PayPal Payout.
 6. **Hold.** Otherwise nothing moves, and the ledger shows the reason.
 
-## Architecture
-![PR-BountyPay architecture](docs/architecture.png)
 
 ### Outcomes tested on the sandbox
 
@@ -39,6 +37,12 @@ Paying outside contributors is slow and risky. Someone has to check that the fix
 
 ## Architecture
 
+![PR-BountyPay architecture](docs/architecture.png)
+
+
+<details>
+<summary>Text version of the flow</summary>
+
 ```
 Maintainer --(dashboard)--> FastAPI backend --> PayPal Orders (AUTHORIZE hold)
 Contributor --(PR)--> GitHub --webhook--> FastAPI backend
@@ -48,6 +52,10 @@ Contributor --(PR)--> GitHub --webhook--> FastAPI backend
                                               |-- all gates pass -> PayPal capture + Payout
 React + AG Grid dashboard <---- GET /bounties (live ledger, SQLite)
 ```
+
+</details>
+
+
 
 - **Backend:** Python, FastAPI, SQLite ledger with a strict state machine (`CREATED, LOCKED, SETTLING, CAPTURE_COMPLETED, PAID`)
 - **AI:** Google Gemini (`google-genai`), typed JSON schema output, retry on temporary errors
