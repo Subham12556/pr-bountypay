@@ -4,6 +4,8 @@
 
 > Built for the PayPal AI Hackathon. Runs entirely on the **PayPal Sandbox** (test money).
 
+[![Watch the demo video](https://img.youtube.com/vi/8alN2ko8rS0/hqdefault.jpg)](https://youtu.be/8alN2ko8rS0)
+
 - Demo video: `<YouTube link>`
 - Demo repository the agent runs against: https://github.com/Subham12556/pr-bountypay-demo
   - Paid: [PR #4](https://github.com/Subham12556/pr-bountypay-demo/pull/4) | Secret blocked: [PR #6](https://github.com/Subham12556/pr-bountypay-demo/pull/6) | Tests edited, CI failed: [PR #8](https://github.com/Subham12556/pr-bountypay-demo/pull/8)
@@ -24,6 +26,12 @@ Paying outside contributors is slow and risky. Someone has to check that the fix
 4. **Audit.** If tests pass, the agent reads the diff. It runs a fixed pattern scan for hard-coded secrets, checks for tampered protected files, then asks Gemini for a structured security review (score, secrets, prompt-injection attempt, verdict).
 5. **Pay.** Only if tests pass, no secrets are found, no injection is detected and the score is **95 or higher**, the agent captures the hold and sends a PayPal Payout.
 6. **Hold.** Otherwise nothing moves, and the ledger shows the reason.
+
+## How PayPal, AI and AG Grid are used
+
+- **PayPal (Sandbox):** Orders v2 (AUTHORIZE) holds the funds, Payments v2 captures them, and Payouts pays the contributor.
+- **AI (Google Gemini):** audits each passing pull request and returns a structured verdict that decides whether the payout is released.
+- **AG Grid (sponsor tool):** powers the live ledger dashboard, with custom cell renderers, quick filter and live row updates.
 
 
 ### Outcomes tested on the sandbox
